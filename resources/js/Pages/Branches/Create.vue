@@ -4,10 +4,10 @@ import { Link, router } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import { IDefault } from "@/interface/DefaultInterface";
+import { IMainParams } from "@/interface/MainParams";
 
 interface IProps {
-    sections: [IDefault];
+    sections: [IMainParams];
     errors: any
 }
 
@@ -23,7 +23,6 @@ const store = () => {
     router.post('/branches', {...data.value});
 }
 const getBranches = () => {
-    console.log(data.value.section_id);
     axios.get(`/sections/${data.value.section_id}/branches`)
         .then(({data}) => {
             branches.value = data

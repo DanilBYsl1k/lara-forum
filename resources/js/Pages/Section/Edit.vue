@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import MainLayout from "@/Layouts/MainLayout.vue";
-import { IDefault } from "@/interface/DefaultInterface";
+import { IMainParams } from "@/interface/MainParams";
 import { ref } from "vue";
 import { Link, router } from "@inertiajs/vue3";
 
 interface IProps {
-    section: IDefault
+    section: IMainParams
 }
 
 const { section } = defineProps<IProps>();

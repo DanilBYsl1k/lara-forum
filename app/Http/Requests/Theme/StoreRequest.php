@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Branch;
+namespace App\Http\Requests\Theme;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'section_id' => 'required|integer|exists:sections,id',
-            'parent_id' => 'nullable|integer|exists:branches,id',
-            'title' => 'required|string'
-        ];
-    }
-
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'Field title need to fill',
-            'section_id.required' => 'Field chapter need to fill',
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'branch_id' => 'required|integer|exists:branches,id'
         ];
     }
 }

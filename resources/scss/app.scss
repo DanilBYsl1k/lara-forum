@@ -50,3 +50,63 @@ button, .button {
         display: none;
     }
 }
+
+.section {
+    &__title {
+        font-size: rem-calc(30);
+        border-bottom: rem-calc(1) solid grey;
+        padding-bottom: rem-calc(10);
+        display: flex;
+        align-items: center;
+        gap: rem-calc(10);
+    }
+}
+
+.branch {
+    &__box {
+        font-size: rem-calc(20);
+        background: white;
+        border: rem-calc(1) solid black;
+        padding: rem-calc(10 15);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:first-child {
+            border-top: none;
+        }
+    }
+
+    &__title {
+        width: 100%;
+        transition: 0.5s ease;
+
+        &:hover {
+            padding-left: rem-calc(20);
+        }
+    }
+
+    &__edit {
+        display: flex;
+        align-items: center;
+        gap: rem-calc(10);
+    }
+
+    .branch__edit-button {
+        padding: rem-calc(10);
+        border-radius: rem-calc(10);
+        transition: 0.2s ease;
+        &:hover {
+            opacity: 0.5;
+        }
+
+        &.edit {
+            background: #9370DB;
+        }
+
+        &.delete {
+            background: crimson;
+        }
+    }
+}
+
