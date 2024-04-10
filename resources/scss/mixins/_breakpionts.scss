@@ -1,0 +1,12 @@
+@import "../vars/breakpoints";
+
+
+@mixin breakpoint($breakpointValue) {
+    @each $breakpoint, $value in $breakpoints {
+        @if $breakpointValue == $breakpoint {
+            @media (max-width: $value) {
+                @content;
+            }
+        }
+    }
+}

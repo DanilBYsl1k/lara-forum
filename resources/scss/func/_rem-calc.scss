@@ -1,0 +1,8 @@
+@function rem-calc($values) {
+    $remValues: ();
+    @each $value in $values {
+        $remValue: ($value / 16) + rem;
+        $remValues: append($remValues, $remValue);
+    }
+    @return $remValues;
+}

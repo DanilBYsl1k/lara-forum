@@ -1,0 +1,52 @@
+@import "func/index";
+@import "mixins/index";
+@import "vars/index";
+@import "base/index";
+
+
+* {
+    box-sizing: border-box;
+}
+
+input, textarea, select, {
+    border-radius: rem-calc(10) !important;
+
+}
+
+button, .button {
+    display: inline-block;
+    padding: $button-padding;
+    color: $white;
+    font-weight: 700;
+    border-radius: rem-calc(10);
+    background: $button-color;
+    transition: 0.3s ease;
+    &:hover {
+        background: $button-color-hover;
+    }
+}
+
+.link {
+
+}
+
+.btn-container {
+    margin: rem-calc(10 0);
+    .button {
+        margin-right: rem-calc(10);
+    }
+}
+
+.container {
+    max-width: rem-calc(1200);
+    margin: auto;
+}
+
+
+.error {
+    color: red;
+
+    + .error {
+        display: none;
+    }
+}
