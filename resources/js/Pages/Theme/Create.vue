@@ -22,30 +22,31 @@ const store = () => {
 
 <template>
   <MainLayout>
-    <section>
-      <div class="container">
-          <h3>Add Theme</h3>
-        {{ branch.id }}
-      </div>
-    </section>
+      <div class="theme">
+          <section>
+              <div class="container">
+                  <h3>Add Theme</h3>
+              </div>
+          </section>
 
-    <section>
-      <div class="container">
-        <div>
-          <input v-model="title" type="text" placeholder="title">
-        </div>
-        <div>
-          <textarea v-model="description" id="story" name="story" placeholder="overview" rows="5" cols="33">
-          </textarea>
-        </div>
-        <div>
-          <a class="button" @click.prevent="store" href="">Add theme</a>
-        </div>
+          <section>
+              <div class="container">
+                  <div>
+                      <input v-model="title" type="text" placeholder="title">
+                  </div>
+                  <div>
+                      <textarea v-model="description" id="story" name="story" placeholder="overview" rows="5" cols="33">
+                      </textarea>
+                  </div>
+                  <div>
+                      <a class="button" @click.prevent="store" href="">Add theme</a>
+                  </div>
+              </div>
+          </section>
       </div>
-    </section>
   </MainLayout>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

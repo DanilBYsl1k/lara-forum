@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Theme;
+namespace App\Http\Requests\Messages;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,20 +11,19 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
-            'description' => 'nullable|string',
-            'branch_id' => 'required|integer|exists:branches,id',
+            'content' => 'required|string',
+            'theme_id' => 'required|integer|exists:themes,id',
         ];
     }
 }

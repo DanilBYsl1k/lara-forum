@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\MessagesController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('sections', SectionController::class);
     Route::resource('branches', BranchController::class);
     Route::resource('themes', ThemeController::class);
-
+    Route::resource('messages', MessagesController::class);
 
     Route::get('sections/{sections}/branches', [SectionController::class, 'branchIndex']);
     Route::get('sections/{sections}/branches_except/{branch}', [SectionController::class, 'branchIndexExcept']);
