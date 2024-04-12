@@ -8,7 +8,7 @@ import { IMainParams } from "@/interface/MainParams";
 import { IBranchInterface } from "@/interface/BranchInterface";
 
 interface IProps {
-  sections: [IMainParams];
+  sections: IMainParams[];
   branch: IBranchInterface;
   errors: any
 }
@@ -20,7 +20,7 @@ const props = defineProps<IProps>();
 let branches = ref<[IBranchInterface]>(null);
 let section = ref<data>({
   section_id: props.branch.section_id,
-  parent_id: null,
+  parent_id: 0,
   title: props.branch.title,
 });
 

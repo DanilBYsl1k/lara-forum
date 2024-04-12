@@ -4,7 +4,7 @@ interface ISection extends IMainParams {
 }
 
 interface IProps {
-    sections: [ISection]
+    sections: ISection[];
 }
 
 import MainLayout from "@/Layouts/MainLayout.vue";

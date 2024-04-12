@@ -5,7 +5,12 @@ import { Link } from "@inertiajs/vue3";
 <template>
     <header class="header">
         <div class="container header__container">
-            <Link :href="route('sections.index')">Forum</Link>
+            <nav>
+                <ul>
+                    <li><Link :href="route('sections.index')">Forum</Link></li>
+                    <li><Link :href="route('users.personal')">Profile</Link></li>
+                </ul>
+            </nav>
         </div>
     </header>
 </template>
@@ -13,6 +18,14 @@ import { Link } from "@inertiajs/vue3";
 <style lang="scss" scoped>
 @import "../../scss/vars/colors";
 @import "../../scss/func/rem-calc";
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: rem-calc(10);
+}
 
 .header {
     color: $white;

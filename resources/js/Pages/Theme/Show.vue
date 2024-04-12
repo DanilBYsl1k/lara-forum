@@ -2,10 +2,9 @@
 
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { ref } from "vue";
-import { router } from "@inertiajs/vue3";
+import axios from "axios";
 
 import { IThemes } from "@/interface/Temes";
-import axios from "axios";
 
 interface IProps {
     theme: IThemes
@@ -28,6 +27,36 @@ const store = () => {
             <section class="theme__title">
                 <div class="container">
                     <h2>Edit Theme: {{ theme.title }}</h2>
+                </div>
+            </section>
+
+            <section v-if="theme.messages">
+                <div class="container">
+                    <template v-for="message in theme.messages">
+                        <div class="theme__message-box">
+                            <div class="theme__message-name">
+                                <div class="user-logo">
+                                    <img :src="message.user?.avatar" alt="">
+                                </div>
+                                <h6>
+                                    {{ message.user.name }}
+                                </h6>
+                            </div>
+                            <div class="theme__message-content">
+                                <div>
+                                    <p>
+                                        <em>
+                                            <time :datetime="message.time">{{ message.time }}</time>
+                                        </em>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p v-html="message.content"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </template>
                 </div>
             </section>
 
@@ -71,6 +100,42 @@ const store = () => {
     &__message-field {
         border: rem-calc(1) solid black;
         padding: rem-calc(10);
+    }
+
+    &__message-box {
+        border: rem-calc(1) solid black;
+        border-radius: rem-calc(20);
+        margin-bottom: rem-calc(10);
+    }
+
+    &__message-name {
+        display: flex;
+        align-items: center;
+        gap: rem-calc(10);
+        padding: rem-calc(20);
+    }
+
+    &__message-content {
+        padding: rem-calc(10 20 20 20);
+        border-top: rem-calc(1) solid black;
+    }
+
+    h6 {
+        font-size: rem-calc(25);
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+
+    .user-logo {
+        width: rem-calc(40);
+        height: rem-calc(40);
+        border-radius: 100%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
 }
 </style>

@@ -7,8 +7,8 @@ export interface IBranchInterface extends IMainParams{
 }
 
 export interface IBranchWithChild extends IBranchInterface {
-    children: [IBranchInterface];
-    themes?: [IThemes];
+    children: IBranchInterface[];
+    themes?: IThemes[];
 }
 
 
