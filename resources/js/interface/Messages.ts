@@ -5,5 +5,7 @@ export interface IMessages {
     id: number;
     theme_id: number;
     time: string;
-    user: IUser
+    user: IUser;
+    is_liked: boolean;
+    likes: number;
 }

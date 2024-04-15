@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Messages\StoreRequest;
 use App\Http\Requests\Messages\UpdateRequest;
+use Illuminate\Support\Str;
 use App\Http\Resources\Messages\MessagesResources;
 use App\Models\Messages;
 use Illuminate\Http\Request;
@@ -33,6 +34,14 @@ class MessagesController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = auth()->id();
+
+        $ids = Str::of($data['content'])->matchAll('/@[\d]+/')->transform(
+            function ($id) {
+                return Str::of($id)->replace('/@/', '')->value();
+            }
+        );
+
+//        dd($ids);
         $message = Messages::create($data);
 
         return MessagesResources::make($message)->resolve();
@@ -68,5 +77,10 @@ class MessagesController extends Controller
     public function destroy(Messages $messages)
     {
         //
+    }
+
+    public function toggleLikes(Messages $message)
+    {
+        $message->likedUsers()->toggle(auth()->id());
     }
 }
