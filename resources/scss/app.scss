@@ -28,6 +28,14 @@ button {
     &:hover {
         background: $button-color-hover;
     }
+
+    &.warn {
+        background: $warn;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
 }
 
 
@@ -57,7 +65,7 @@ button {
 
 
 .error {
-    color: red;
+    color: $warn;
 
     + .error {
         display: none;

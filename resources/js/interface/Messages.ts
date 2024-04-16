@@ -8,4 +8,9 @@ export interface IMessages {
     user: IUser;
     is_liked: boolean;
     likes: number;
+    is_not_solved_complaint: boolean;
+}
+
+export interface IMessageReport extends IMessages {
+    body: string;
 }

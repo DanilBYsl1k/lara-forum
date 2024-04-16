@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('messages/{message}/likes', [MessagesController::class, 'toggleLikes']);
 
+    Route::post('messages/{messages}/complaints', [MessagesController::class, 'storeComplains'])->name('message.complains.store');
+
     Route::get('users/personal', [UserController::class, 'personal'])->name('users.personal');
     Route::patch('/users/avatar', [UserController::class, 'update']);
 
