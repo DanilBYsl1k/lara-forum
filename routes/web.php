@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\UserController;
 
@@ -48,8 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::get('branches/{branch}/theme/create', [BranchController::class, 'themeCreate'])->name('branches.themes.create');
 
     Route::post('messages/{message}/likes', [MessagesController::class, 'toggleLikes']);
-
     Route::post('messages/{messages}/complaints', [MessagesController::class, 'storeComplains'])->name('message.complains.store');
+
+    Route::patch('images', [ImageController::class, 'store'])->name('images.store');
 
     Route::get('users/personal', [UserController::class, 'personal'])->name('users.personal');
     Route::patch('/users/avatar', [UserController::class, 'update']);

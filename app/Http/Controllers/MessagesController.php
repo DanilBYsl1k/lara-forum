@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 use App\Http\Requests\Messages\StoreRequest as MessageStoreRequest;
@@ -43,11 +45,31 @@ class MessagesController extends Controller
             }
         );
 
+        $imageIds = Str::of($data['content'])->matchAll('/data-img_id="(\d+)"/')->unique()->transform(
+            function ($id) {
+                $id = Str::of($id)->replace('/data-img_id=/', '')->value();
+                return $id;
+            }
+        );
+
+        dd($imageIds);
 
         $message = Messages::create($data);
 
-        $message->answeredUsers()->attach($ids);
+        Image::whereIn('id', $imageIds)->update([
+            'message_id' => $message->id
+        ]);
 
+        Image::where('user_id', auth()->id())
+            ->whereNull('message_id')
+            ->get()
+            ->pluck('path')
+            ->each(
+                function ($path) {
+                    Storage::disk('public')->delete($path);
+            });
+
+        $message->answeredUsers()->attach($ids);
         $message->loadCount('likedUsers');
 
         return MessagesResources::make($message)->resolve();
@@ -90,13 +112,12 @@ class MessagesController extends Controller
         $message->likedUsers()->toggle(auth()->id());
     }
 
-    public function storeComplains(ComplainStoreRequest $request,Messages $messages)
+    public function storeComplains(ComplainStoreRequest $request, Messages $messages)
     {
         $data = $request->validated();
 
         $messages->complaintdUsers()->attach(auth()->user(), $data);
 
-//        return MessagesResources::make($messages);
         return MessagesResources::make($messages)->resolve();
     }
 }

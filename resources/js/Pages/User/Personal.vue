@@ -11,14 +11,14 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const avatarInput = ref(null);
+const avatarInput = ref();
 
 const handleAvatarClick = () => {
     avatarInput.value.click();
 }
 
-const storeAvatar = (event) => {
-    let [ file ] = event.target.files;
+const storeAvatar = ({ target } : Event) => {
+    let [ file ] = target?.files;
     const formData = new FormData();
     formData.append('avatar', file);
     formData.append('_method', 'patch');

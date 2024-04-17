@@ -15,6 +15,10 @@ export default class MessagesService {
     public static async complaint({ id, theme_id, body }: IMessageReport): Promise<void> {
         return await axios.post(`/messages/${id}/complaints`, { theme_id, body });
     }
+
+    public static async uploadImgMessage(formData: FormData): Promise<{id: number, url: string, user_id: number}> {
+        return await axios.post('/images', formData);
+    }
 }
 
 
