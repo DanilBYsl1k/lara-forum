@@ -45,14 +45,7 @@ class MessagesController extends Controller
             }
         );
 
-        $imageIds = Str::of($data['content'])->matchAll('/data-img_id="(\d+)"/')->unique()->transform(
-            function ($id) {
-                $id = Str::of($id)->replace('/data-img_id=/', '')->value();
-                return $id;
-            }
-        );
-
-        dd($imageIds);
+        $imageIds = Str::of($data['content'])->matchAll('/data-img_id="(\d+)"/');
 
         $message = Messages::create($data);
 

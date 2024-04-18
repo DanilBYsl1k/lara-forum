@@ -16,7 +16,7 @@ export default class MessagesService {
         return await axios.post(`/messages/${id}/complaints`, { theme_id, body });
     }
 
-    public static async uploadImgMessage(formData: FormData): Promise<{id: number, url: string, user_id: number}> {
+    public static async uploadImgMessage(formData: FormData): Promise<{ id: number, url: string, user_id: number }> {
         return await axios.post('/images', formData);
     }
 }

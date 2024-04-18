@@ -44,14 +44,14 @@ const storeImage = ({ target }: Event) => {
 
     MessagesService.uploadImgMessage(formData)
         .then(({ data }) => data)
-        .then(({ url, user_id }) => {
-            uploadImage(url, user_id);
+        .then(({ url, id }) => {
+            uploadImage(url, id);
         })
 }
 
-const uploadImage = (url: string, user_id: number) => {
+const uploadImage = (url: string, id: number) => {
     const editor = content.value;
-    editor.innerHTML = `${editor.innerHTML}<div><img data-img_id="${user_id}" src="${url}" alt="img"></div>`;
+    editor.innerHTML = `${editor.innerHTML}<div><img data-img_id="${id}" src="${url}" alt="img"></div>`;
 }
 
 const answer = ({ user, content: comment, time }: IMessages) => {
