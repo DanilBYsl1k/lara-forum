@@ -2,9 +2,9 @@
 
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { ref } from "vue";
-import { router } from "@inertiajs/vue3";
 
 import { IBranchInterface } from "@/interface/BranchInterface";
+import ThemeService from "@/services/ThemeService";
 
 interface IProps {
   branch: IBranchInterface
@@ -12,11 +12,11 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-let description = ref('');
-let title = ref('');
+let description = ref<string>('');
+let title = ref<string>('');
 
-const store = () => {
-  router.post('/themes', { description: description.value, title: title.value, branch_id: props.branch.id });
+const store = (): void => {
+    ThemeService.CreateTheme({ description: description.value, title: title.value, branch_id: props.branch.id });
 }
 </script>
 

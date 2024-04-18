@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import axios from "axios";
-import { Link, router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import { ref, onMounted } from "vue";
 
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { IMainParams } from "@/interface/MainParams";
 import { IBranchInterface } from "@/interface/BranchInterface";
+import SectionsService from "@/services/SectionsService";
+import BranchesService from "@/services/BranchesService";
 
 interface IProps {
   sections: IMainParams[];
@@ -15,28 +16,27 @@ interface IProps {
 
 type data = Omit<IBranchInterface, 'id'>
 
-const props = defineProps<IProps>();
+const { branch, sections } = defineProps<IProps>();
 
-let branches = ref<[IBranchInterface]>(null);
+let branches = ref<[IBranchInterface]>();
 let section = ref<data>({
-  section_id: props.branch.section_id,
+  section_id: branch.section_id,
   parent_id: 0,
-  title: props.branch.title,
+  title: branch.title,
 });
 
 onMounted(() => {
   getBranches();
 })
 
-const update = () => {
-  router.patch(`/branches/${props.branch.id}`, { ...section.value });
+const update = (): void => {
+  BranchesService.updateBranches(branch.id, section.value);
 }
-const getBranches = () => {
-  axios.get(`/sections/${section.value.section_id}/branches_except/${props.branch.id}`)
-      .then(({ data }) => {
+
+const getBranches = (): void => {
+    SectionsService.getBranchesExcept(section.value.section_id, branch.id).then(({ data }) => {
         branches.value = data
-        console.log(data)
-      })
+    })
 }
 </script>
 

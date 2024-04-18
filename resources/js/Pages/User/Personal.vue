@@ -3,6 +3,7 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import { IUser } from "@/interface/User";
 import { ref } from "vue";
 import axios from "axios";
+import UserService from "@/services/UserService";
 
 interface IProps {
     user: IUser
@@ -23,8 +24,7 @@ const storeAvatar = ({ target } : Event) => {
     formData.append('avatar', file);
     formData.append('_method', 'patch');
 
-    axios.post('/users/avatar', formData)
-        .then(res => res.data).then(({ avatar }) => {
+    UserService.userAvatar(formData).then(res => res.data).then(({ avatar }) => {
         props.user.avatar = avatar
     });
 }

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import axios from "axios";
-import { Link, router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { IMainParams } from "@/interface/MainParams";
+import SectionsService from "@/services/SectionsService";
+import BranchesService from "@/services/BranchesService";
+import { BranchWithoutId } from "@/interface/BranchInterface";
 
 interface IProps {
     sections: [IMainParams];
@@ -14,16 +16,18 @@ interface IProps {
 defineProps<IProps>();
 
 let branches = ref(null);
-let data = ref({
-    section_id: null,
+let data = ref<BranchWithoutId>({
+    section_id: 0,
     parent_id: null,
     title: '',
 });
-const store = () => {
-    router.post('/branches', {...data.value});
+
+const store = (): void => {
+    BranchesService.createBranches(data.value);
 }
+
 const getBranches = () => {
-    axios.get(`/sections/${data.value.section_id}/branches`)
+    SectionsService.getBranches(data.value.section_id)
         .then(({data}) => {
             branches.value = data
         })

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import { Link } from "@inertiajs/vue3";
+
 import MainLayout from "@/Layouts/MainLayout.vue";
 import { IMainParams } from "@/interface/MainParams";
-import { ref } from "vue";
-import { Link, router } from "@inertiajs/vue3";
+import SectionsService from "@/services/SectionsService";
 
 interface IProps {
     section: IMainParams
@@ -13,7 +15,7 @@ const { section } = defineProps<IProps>();
 const title = ref<string>(section.title);
 
 const store = () => {
-    router.patch(`/sections/${section.id}`, {title: title.value});
+    SectionsService.storeSection(section.id, title.value);
 }
 </script>
 

@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { ref } from "vue";
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import { ref } from "vue";
-import { router } from "@inertiajs/vue3";
-
 import { IThemes } from "@/interface/Temes";
+import ThemeService from "@/services/ThemeService";
 
 interface IProps {
     theme: IThemes
@@ -12,11 +11,11 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-let description = ref(props.theme.description);
-let title = ref(props.theme.title);
+let description = ref<string>(props.theme.description);
+let title = ref<string>(props.theme.title);
 
-const update = () => {
-    router.patch(`/themes/${props.theme.id}`, { title: title.value, description: description.value } );
+const update = (): void => {
+    ThemeService.updateTheme(props.theme.id, { title: title.value, description: description.value });
 }
 </script>
 

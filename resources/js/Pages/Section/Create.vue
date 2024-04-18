@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import MainLayout from "@/Layouts/MainLayout.vue";
-import { Link, router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
-let title = ref('');
+import MainLayout from "@/Layouts/MainLayout.vue";
+import SectionsService from "@/services/SectionsService";
 
-const store = () => {
-    router.post('/sections', { title: title.value});
+let title = ref<string>('');
+
+const store = (): void => {
+    SectionsService.CreateSection(title.value)
 }
 
 </script>
