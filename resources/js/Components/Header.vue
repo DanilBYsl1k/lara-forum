@@ -9,6 +9,7 @@ import { Link } from "@inertiajs/vue3";
                 <ul>
                     <li><Link :href="route('sections.index')">Forum</Link></li>
                     <li><Link :href="route('users.personal')">Profile</Link></li>
+                    <li><Link :href="route('admin.main.index')">Admin panel</Link></li>
                 </ul>
             </nav>
         </div>

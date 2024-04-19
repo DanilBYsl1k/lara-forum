@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -42,8 +43,9 @@ class MessagesController extends Controller
             function ($id) {
                 $id = Str::of($id)->replace('@', '')->value();
                 return $id;
-            }
-        );
+            })->filter(function ($id) {
+            return User::where('id', $id)->exists();
+        });
 
         $imageIds = Str::of($data['content'])->matchAll('/data-img_id="(\d+)"/');
 
@@ -60,7 +62,7 @@ class MessagesController extends Controller
             ->each(
                 function ($path) {
                     Storage::disk('public')->delete($path);
-            });
+                });
 
         $message->answeredUsers()->attach($ids);
         $message->loadCount('likedUsers');

@@ -7,6 +7,9 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\ComplaintController;
+
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +58,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('users/personal', [UserController::class, 'personal'])->name('users.personal');
     Route::patch('/users/avatar', [UserController::class, 'update']);
+
+    Route::get('/admin', [MainController::class, 'index'])->name('admin.main.index');
+    Route::get('/admin/complaint', [ComplaintController::class, 'index'])->name('admin.complaints.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
